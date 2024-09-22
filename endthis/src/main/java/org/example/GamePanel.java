@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int tileMult = 3;
     public final int tileSize = defTile*tileMult;
     public final int screenHeight = maxRow*tileSize;
-    public final int screenWidth = maxRow*tileSize;
+    public final int screenWidth = maxCol*tileSize;
     public TileManager tM = new TileManager(this);
     public Player p;
     public InputHandler iH = new InputHandler();

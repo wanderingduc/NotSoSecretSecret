@@ -18,7 +18,7 @@ public class TileManager {
 
     public TileManager(GamePanel gP) {
         this.gP = gP;
-        this.mapFile = "start.txt";
+        this.mapFile = "testMap1.txt";
 
         loadMap();
     }
@@ -35,7 +35,7 @@ public class TileManager {
         try {
 
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            InputStream is = classloader.getResourceAsStream("start.txt");
+            InputStream is = classloader.getResourceAsStream(mapFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             int col = 0;

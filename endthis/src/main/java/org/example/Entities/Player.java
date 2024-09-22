@@ -1,6 +1,7 @@
 package org.example.Entities;
 
 import org.example.GamePanel;
+import org.example.Utils.CollisionChecker;
 import org.example.Utils.InputHandler;
 import org.w3c.dom.css.Rect;
 
@@ -16,10 +17,12 @@ public class Player {
     public InputHandler iH;
     public char dir;
     public int speed = 2;
+    public CollisionChecker cC;
 
     public Player(GamePanel gP, InputHandler iH){
         this.gP = gP;
         this.iH = iH;
+        this.cC = new CollisionChecker(gP, this, gP.tM);
         setDefaultPos();
     }
 
@@ -49,20 +52,21 @@ public class Player {
             if(iH.right==true){
                 dir = 'r';
             }
-
-            switch (dir){
-                case 'u':
-                    y-=speed;
-                    break;
-                case 'd':
-                    y+=speed;
-                    break;
-                case 'l':
-                    x-=speed;
-                    break;
-                case 'r':
-                    x+=speed;
-                    break;
+            if(cC.checkTile()) {
+                switch (dir) {
+                    case 'u':
+                        y -= speed;
+                        break;
+                    case 'd':
+                        y += speed;
+                        break;
+                    case 'l':
+                        x -= speed;
+                        break;
+                    case 'r':
+                        x += speed;
+                        break;
+                }
             }
         }
     }

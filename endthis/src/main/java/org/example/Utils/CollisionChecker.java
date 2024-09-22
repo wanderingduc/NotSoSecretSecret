@@ -18,35 +18,58 @@ public class CollisionChecker {
     }
 
     public boolean checkTile(){
-        int nextTileColLeft;
-        int nextTileRowUp;
-        int nextTileColRight;
-        int nextTileRowDown;
-        if(p.dir=='u') {
-            nextTileRowUp = (p.y - p.speed) / gP.tileSize;
-            nextTileRowDown = (nextTileRowUp + gP.tileSize) / gP.tileSize;
-            if(!tM.map.get(nextTileRowUp).get(p.x).collisionStatus){
+        int playerX = p.x;
+        int playerY = p.y;
+        int nextTileCol;
+        int nextTileColE;
+        int nextTileRow;
+        int nextTileRowE;
+        if(p.dir=='u'){
+            nextTileRow = (playerY - p.speed)/gP.tileSize;
+            nextTileRowE = (playerY - p.speed + gP.tileSize)/gP.tileSize;
+            nextTileCol = playerX/gP.tileSize;
+            nextTileColE = (playerX + gP.tileSize)/gP.tileSize;
+
+            if(nextTileRow >= tM.map.size() || tM.map.get(nextTileRow).get(nextTileCol).collisionStatus ||
+                    tM.map.get(nextTileRowE).get(nextTileColE).collisionStatus ||
+                    tM.map.get(nextTileRow).get(nextTileColE).collisionStatus ||
+                    tM.map.get(nextTileRowE).get(nextTileCol).collisionStatus){
                 return false;
             }
         }
         if(p.dir=='d'){
-            nextTileRowUp = (p.y + p.speed) / gP.tileSize;
-            nextTileRowDown = (nextTileRowUp + gP.tileSize) / gP.tileSize;
-            if(!tM.map.get(nextTileRowDown).get(p.x).collisionStatus){
+            nextTileRow = (playerY + p.speed)/gP.tileSize;
+            nextTileRowE = (playerY + p.speed + gP.tileSize)/gP.tileSize;
+            nextTileCol = playerX/gP.tileSize;
+            nextTileColE = (playerX + gP.tileSize)/gP.tileSize;
+            if(nextTileRow <= 0 || tM.map.get(nextTileRow).get(nextTileCol).collisionStatus ||
+                    tM.map.get(nextTileRowE).get(nextTileColE).collisionStatus ||
+                    tM.map.get(nextTileRow).get(nextTileColE).collisionStatus ||
+                    tM.map.get(nextTileRowE).get(nextTileCol).collisionStatus){
                 return false;
             }
         }
         if(p.dir=='l'){
-            nextTileColLeft = (p.x - p.speed) / gP.tileSize;
-            nextTileColRight = (nextTileColLeft + gP.tileSize) / gP.tileSize;
-            if(!tM.map.get(p.y).get(nextTileColLeft).collisionStatus){
+            nextTileRow = playerY/gP.tileSize;
+            nextTileRowE = (playerY + gP.tileSize)/gP.tileSize;
+            nextTileCol = (playerX - p.speed)/ gP.tileSize;
+            nextTileColE = (playerX - p.speed + gP.tileSize)/gP.tileSize;
+            if(nextTileCol <= 0 || tM.map.get(nextTileRow).get(nextTileCol).collisionStatus ||
+                    tM.map.get(nextTileRowE).get(nextTileColE).collisionStatus ||
+                    tM.map.get(nextTileRow).get(nextTileColE).collisionStatus ||
+                    tM.map.get(nextTileRowE).get(nextTileCol).collisionStatus){
                 return false;
             }
         }
         if(p.dir=='r'){
-            nextTileColLeft = (p.x + p.speed) / gP.tileSize;
-            nextTileColRight = (nextTileColLeft + gP.tileSize) / gP.tileSize;
-            if(!tM.map.get(p.x).get(nextTileColRight).collisionStatus){
+            nextTileRow = (playerY)/ gP.tileSize;
+            nextTileRowE = (playerY + gP.tileSize)/gP.tileSize;
+            nextTileCol = (playerX + p.speed)/ gP.tileSize;
+            nextTileColE = (playerX + p.speed + gP.tileSize)/gP.tileSize;
+            if(nextTileCol >= tM.map.get(0).size() || tM.map.get(nextTileRow).get(nextTileCol).collisionStatus ||
+            tM.map.get(nextTileRowE).get(nextTileColE).collisionStatus ||
+                    tM.map.get(nextTileRow).get(nextTileColE).collisionStatus ||
+                    tM.map.get(nextTileRowE).get(nextTileCol).collisionStatus){
                 return false;
             }
         }
