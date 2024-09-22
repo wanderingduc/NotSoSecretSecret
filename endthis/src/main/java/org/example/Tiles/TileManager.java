@@ -5,6 +5,8 @@ import org.example.GamePanel;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TileManager {
 
@@ -12,7 +14,7 @@ public class TileManager {
     public GamePanel gP;
     public TileFactory tF = new TileFactory();
 
-    public int[][] map;
+    public List<List<Tile>> map;
 
     public TileManager(GamePanel gP) {
         this.gP = gP;
@@ -29,7 +31,7 @@ public class TileManager {
     }
 
     public void loadMap() {
-        map = new int[gP.maxRow][gP.maxCol];
+        map = new ArrayList<List<Tile>>();
         try {
 
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
@@ -40,7 +42,7 @@ public class TileManager {
             int row = 0;
 
             while(col < gP.maxCol && row < gP.maxRow) {
-
+                map.add(new ArrayList<>());
                 String line = br.readLine();
 
                 while(col < gP.maxCol) {
@@ -48,7 +50,7 @@ public class TileManager {
 
                     int num = Integer.parseInt(numbers[col]);
 
-                    map[row][col] = num;
+                    map.get(row).add(col, new Tile(num, row, col));
                     col++;
                 }
                 if(col == gP.maxCol) {
@@ -65,9 +67,9 @@ public class TileManager {
     }
 
     private void printMap(){
-        for(int row=0; row<map.length; row++){
-            for(int col=0; col<map[0].length; col++){
-                System.out.print(map[row][col]);
+        for(int row=0; row<map.size(); row++){
+            for(int col=0; col<map.get(0).size(); col++){
+                System.out.print(map.get(row).get(col));
 
             }
             System.out.println();
@@ -88,7 +90,7 @@ public class TileManager {
         while (col < gP.maxCol && row < gP.maxRow) {
             x = col * gP.tileSize;
             y = row * gP.tileSize;
-            tile = map[row][col];
+            tile = map.get(row).get(col).type;
             switch (tile) {
                 case 1:
                     color = Color.GREEN;

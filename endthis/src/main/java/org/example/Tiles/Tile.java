@@ -2,11 +2,15 @@ package org.example.Tiles;
 
 public class Tile {
 
-    int type;
-    boolean collisionStatus;
+    public int type;
+    public boolean collisionStatus;
+    public int row;
+    public int col;
 
-    public Tile(int type){
+    public Tile(int type, int row, int col){
         this.type = type;
+        this.row = row;
+        this.col = col;
     }
 
     public void setCollision(int type){
