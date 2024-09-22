@@ -49,7 +49,6 @@ public class Player {
             if(iH.right==true){
                 dir = 'r';
             }
-            System.out.println(dir);
 
             switch (dir){
                 case 'u':

@@ -11,6 +11,8 @@ public class Tile {
         this.type = type;
         this.row = row;
         this.col = col;
+
+        setCollision(type);
     }
 
     public void setCollision(int type){
