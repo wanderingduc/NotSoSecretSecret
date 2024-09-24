@@ -12,7 +12,6 @@ public class TileManager {
 
     public String mapFile;
     public GamePanel gP;
-    public TileFactory tF = new TileFactory();
 
     public List<List<Tile>> map;
 
@@ -100,6 +99,9 @@ public class TileManager {
                     break;
                 case 3:
                     color = Color.BLUE;
+                    break;
+                case 4:
+                    color = Color.DARK_GRAY;
                     break;
                 default:
                     color = Color.RED;

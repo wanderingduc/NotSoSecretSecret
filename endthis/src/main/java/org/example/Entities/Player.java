@@ -1,13 +1,12 @@
 package org.example.Entities;
 
 import org.example.GamePanel;
+import org.example.Tiles.TileManager;
 import org.example.Utils.CollisionChecker;
 import org.example.Utils.InputHandler;
-import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.io.InputStream;
 
 public class Player {
 
@@ -52,7 +51,7 @@ public class Player {
             if(iH.right==true){
                 dir = 'r';
             }
-            if(cC.checkTile()) {
+            if(cC.checkTileCollision()) {
                 switch (dir) {
                     case 'u':
                         y -= speed;
@@ -67,6 +66,9 @@ public class Player {
                         x += speed;
                         break;
                 }
+            }
+            if(cC.checkTileDoor()){
+                System.out.println("This is door");
             }
         }
     }
