@@ -6,8 +6,6 @@ import org.example.Utils.InputHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
-import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -56,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void update(){
-        p.updatePos();
+        p.update();
     }
 
     @Override
