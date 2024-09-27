@@ -6,7 +6,9 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TileManager {
 
@@ -14,18 +16,25 @@ public class TileManager {
     public GamePanel gP;
 
     public List<List<Tile>> map;
+    public Map<String, String> doors;
 
     public TileManager(GamePanel gP) {
         this.gP = gP;
         this.mapFile = "testMap1.txt";
 
         loadMap();
+        loadDoors();
     }
 
     public TileManager(GamePanel gP, String mapFile) {
         this.gP = gP;
         this.mapFile = mapFile;
 
+        loadMap();
+    }
+
+    public void changeMap(String newMap){
+        mapFile = newMap;
         loadMap();
     }
 
@@ -63,6 +72,10 @@ public class TileManager {
             e.printStackTrace();
         }
         printMap();
+    }
+
+    public void loadDoors(){
+        doors = new HashMap<>();
     }
 
     private void printMap(){
