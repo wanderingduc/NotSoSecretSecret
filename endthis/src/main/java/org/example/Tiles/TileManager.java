@@ -13,6 +13,7 @@ import java.util.Map;
 public class TileManager {
 
     public String mapFile;
+    public String doorFile;
     public GamePanel gP;
 
     public List<List<Tile>> map;
@@ -21,16 +22,19 @@ public class TileManager {
     public TileManager(GamePanel gP) {
         this.gP = gP;
         this.mapFile = "testMap1.txt";
+        this.doorFile = "testDoor1.txt";
 
         loadMap();
         loadDoors();
     }
 
-    public TileManager(GamePanel gP, String mapFile) {
+    public TileManager(GamePanel gP, String mapFile, String doorFile) {
         this.gP = gP;
         this.mapFile = mapFile;
+        this.doorFile = doorFile;
 
         loadMap();
+        loadDoors();
     }
 
     public void changeMap(String newMap){
@@ -76,6 +80,23 @@ public class TileManager {
 
     public void loadDoors(){
         doors = new HashMap<>();
+
+        try{
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream iS = classLoader.getResourceAsStream(doorFile);
+            BufferedReader bF = new BufferedReader(new InputStreamReader(iS));
+            while(true){
+                String line = bF.readLine();
+                if(line==null){
+                    break;
+                }
+                String data[] = line.split(";");
+                doors.put(data[0], data[1]);
+            }
+            printDoors();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private void printMap(){
@@ -87,6 +108,11 @@ public class TileManager {
             System.out.println();
         }
 
+    }
+
+    private void printDoors(){
+        System.out.println("a");
+        System.out.println(doors);
     }
 
     public void drawMap(Graphics2D g) {
