@@ -81,6 +81,22 @@ public class Player {
                 }
             }
             if(cC.checkTileDoor()){
+                switch (dir) {
+                    case 'u':
+                        y -= speed;
+                        break;
+                    case 'd':
+                        y += speed;
+                        break;
+                    case 'l':
+                        x -= speed;
+                        break;
+                    case 'r':
+                        x += speed;
+                        break;
+                }
+                gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize)));
+                // REMOVE AFTER TESTING
                 System.out.println("This is door");
             }
         }
