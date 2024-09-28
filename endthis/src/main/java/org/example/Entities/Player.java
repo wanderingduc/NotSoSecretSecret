@@ -3,9 +3,11 @@ package org.example.Entities;
 import org.example.GamePanel;
 import org.example.Utils.CollisionChecker;
 import org.example.Utils.InputHandler;
+import org.w3c.dom.ls.LSOutput;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.Map;
 
 public class Player {
 
@@ -18,18 +20,24 @@ public class Player {
     public CollisionChecker cC;
     public int frameC;
     public boolean spriteStatus;
+    public Map<String, String[]> doorMap;
 
     public Player(GamePanel gP, InputHandler iH){
         this.gP = gP;
         this.iH = iH;
         this.cC = new CollisionChecker(gP, this, gP.tM);
         setDefault();
+        setDoorMap(gP.tM.doors);
     }
 
     public void setDefault(){
         x = (gP.screenWidth/2) - (gP.tileSize/2);
         y = (gP.screenHeight/2) - (gP.tileSize/2);
         frameC = 0;
+    }
+
+    public void setDoorMap(Map<String, String[]> map){
+        this.doorMap = map;
     }
 
     public void drawPlayer(Graphics2D g){
@@ -81,26 +89,32 @@ public class Player {
                 }
             }
             if(cC.checkTileDoor()){
+                int newPos;
                 switch (dir) {
                     case 'u':
                         y -= speed;
-                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize)));
-                        y = gP.screenHeight - gP.tileSize;
+                        newPos = Integer.parseInt(doorMap.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
+                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[0], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[1]);
+                        y = gP.screenHeight - (2 * gP.tileSize) - 1 - newPos;// - Integer.parseInt(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
                         break;
                     case 'd':
                         y += speed;
-                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize)));
-                        y = 0;
+                        newPos = Integer.parseInt(doorMap.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[2]);
+                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[0], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[1]);
+                        y = gP.tileSize + 1 + newPos;// + Integer.parseInt(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[2]);
                         break;
                     case 'l':
                         x -= speed;
-                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize)));
-                        x = gP.screenWidth - gP.tileSize;
+                        System.out.println(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize));
+                        newPos = Integer.parseInt(doorMap.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2])*gP.tileSize;
+                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[0], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[1]);
+                        x = newPos - 1;// - Integer.parseInt(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
                         break;
                     case 'r':
                         x += speed;
-                        gP.tM.setMap(gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize)));
-                        x = 0;
+                        newPos = Integer.parseInt(doorMap.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
+                        gP.tM.setMap(gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[0], gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[1]);
+                        x = gP.tileSize + 1 + newPos;// + Integer.parseInt(gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
                         break;
                 }
                 // REMOVE AFTER TESTING

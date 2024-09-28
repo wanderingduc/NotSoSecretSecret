@@ -17,7 +17,7 @@ public class TileManager {
     public GamePanel gP;
 
     public List<List<Tile>> map;
-    public Map<String, String> doors;
+    public Map<String, String[]> doors;
 
     public TileManager(GamePanel gP) {
         this.gP = gP;
@@ -34,7 +34,6 @@ public class TileManager {
         this.doorFile = doorFile;
 
         loadMap();
-        loadDoors();
     }
 
     public void changeMap(String newMap){
@@ -71,6 +70,8 @@ public class TileManager {
                 }
             }
             br.close();
+            loadDoors();
+
 
         }catch(IOException e) {
             e.printStackTrace();
@@ -78,9 +79,11 @@ public class TileManager {
         printMap();
     }
 
-    public void setMap(String mapName){
+    public void setMap(String mapName, String doorName){
         mapFile = mapName;
+        doorFile = doorName;
         loadMap();
+        gP.p.setDoorMap(doors);
     }
 
     public void loadDoors(){
@@ -96,7 +99,7 @@ public class TileManager {
                     break;
                 }
                 String data[] = line.split(";");
-                doors.put(data[0], data[1]);
+                doors.put(data[0], new String[]{data[1], data[2], data[3]});
             }
             printDoors();
         }catch (IOException e){
@@ -118,6 +121,9 @@ public class TileManager {
     private void printDoors(){
         System.out.println("a");
         System.out.println(doors);
+        for(String e : doors.keySet()){
+            System.out.print(doors.get(e)[2]);
+        }
     }
 
     public void drawMap(Graphics2D g) {
