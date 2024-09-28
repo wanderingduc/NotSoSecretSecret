@@ -93,15 +93,15 @@ public class Player {
                 switch (dir) {
                     case 'u':
                         y -= speed;
-                        newPos = Integer.parseInt(doorMap.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
+                        newPos = Integer.parseInt(doorMap.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2])* gP.tileSize;
                         gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[0], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[1]);
-                        y = gP.screenHeight - (2 * gP.tileSize) - 1 - newPos;// - Integer.parseInt(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
+                        y = newPos - 1;// - Integer.parseInt(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
                         break;
                     case 'd':
                         y += speed;
-                        newPos = Integer.parseInt(doorMap.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[2]);
+                        newPos = Integer.parseInt(doorMap.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[2])* gP.tileSize;
                         gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[0], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[1]);
-                        y = gP.tileSize + 1 + newPos;// + Integer.parseInt(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[2]);
+                        y = newPos + 1;// + Integer.parseInt(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[2]);
                         break;
                     case 'l':
                         x -= speed;
@@ -112,9 +112,9 @@ public class Player {
                         break;
                     case 'r':
                         x += speed;
-                        newPos = Integer.parseInt(doorMap.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
+                        newPos = Integer.parseInt(doorMap.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2])* gP.tileSize;
                         gP.tM.setMap(gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[0], gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[1]);
-                        x = gP.tileSize + 1 + newPos;// + Integer.parseInt(gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
+                        x = newPos + 1;// + Integer.parseInt(gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
                         break;
                 }
                 // REMOVE AFTER TESTING
