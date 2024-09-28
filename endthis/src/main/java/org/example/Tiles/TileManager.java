@@ -98,7 +98,7 @@ public class TileManager {
                 String data[] = line.split(";");
                 doors.put(data[0], data[1]);
             }
-            //printDoors();
+            printDoors();
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -117,7 +117,7 @@ public class TileManager {
 
     private void printDoors(){
         System.out.println("a");
-        System.out.println(doors.get("7,6"));
+        System.out.println(doors);
     }
 
     public void drawMap(Graphics2D g) {

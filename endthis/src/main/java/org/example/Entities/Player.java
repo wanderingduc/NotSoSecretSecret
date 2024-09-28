@@ -84,22 +84,31 @@ public class Player {
                 switch (dir) {
                     case 'u':
                         y -= speed;
+                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize)));
+                        y = gP.screenHeight - gP.tileSize;
                         break;
                     case 'd':
                         y += speed;
+                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize)));
+                        y = 0;
                         break;
                     case 'l':
                         x -= speed;
+                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize)));
+                        x = gP.screenWidth - gP.tileSize;
                         break;
                     case 'r':
                         x += speed;
+                        gP.tM.setMap(gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize)));
+                        x = 0;
                         break;
                 }
-                gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize)));
                 // REMOVE AFTER TESTING
                 System.out.println("This is door");
             }
         }
     }
+
+
 
 }

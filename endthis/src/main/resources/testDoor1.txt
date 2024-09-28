@@ -1,1 +1,4 @@
 7,6;start.txt
+7,9;start.txt
+9,3;start.txt
+12,3;start.txt
