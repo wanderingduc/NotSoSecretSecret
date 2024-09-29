@@ -19,6 +19,8 @@ public class Player {
     public int speed = 2;
     public CollisionChecker cC;
     public int frameC;
+    public int lockFrame;
+    public boolean movLock = false;
     public boolean spriteStatus;
     public Map<String, String[]> doorMap;
 
@@ -34,6 +36,7 @@ public class Player {
         x = (gP.screenWidth/2) - (gP.tileSize/2);
         y = (gP.screenHeight/2) - (gP.tileSize/2);
         frameC = 0;
+        lockFrame = 0;
     }
 
     public void setDoorMap(Map<String, String[]> map){
@@ -54,6 +57,13 @@ public class Player {
     }
 
     public void update(){
+        if(movLock){
+            lockFrame++;
+            if(lockFrame>=40){
+                lockFrame=0;
+                movLock = false;
+            }
+        }
         if(iH.up==true || iH.down==true || iH.left==true || iH.right){
             frameC++;
             if(frameC%12==0){
@@ -72,7 +82,7 @@ public class Player {
             if(iH.right){
                 dir = 'r';
             }
-            if(cC.checkTileCollision()) {
+            if(cC.checkTileCollision() && !movLock) {
                 switch (dir) {
                     case 'u':
                         y -= speed;
@@ -117,6 +127,7 @@ public class Player {
                         x = newPos + 1;// + Integer.parseInt(gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
                         break;
                 }
+                movLock = true;
                 // REMOVE AFTER TESTING
                 System.out.println("This is door");
             }
