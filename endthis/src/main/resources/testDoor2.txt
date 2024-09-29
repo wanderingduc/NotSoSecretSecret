@@ -1,0 +1,1 @@
+0,3;testMap1.txt;testDoor1.txt;11
