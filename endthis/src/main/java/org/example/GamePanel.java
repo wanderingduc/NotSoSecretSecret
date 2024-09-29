@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.Entities.EntityManager;
 import org.example.Entities.Player;
 import org.example.Tiles.TileManager;
 import org.example.Utils.InputHandler;
@@ -17,6 +18,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int screenHeight = maxRow*tileSize;
     public final int screenWidth = maxCol*tileSize;
     public TileManager tM = new TileManager(this);
+    public EntityManager eM = new EntityManager(this);
     public Player p;
     public InputHandler iH = new InputHandler();
 
@@ -45,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         tM.drawMap(g2);
         p.drawPlayer(g2);
+        eM.drawEntities(g2);
     }
 
     public void startGame(){

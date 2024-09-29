@@ -102,26 +102,26 @@ public class Player extends Entity{
                     case 'u':
                         y -= speed;
                         newPos = Integer.parseInt(doorMap.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2])* gP.tileSize;
-                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[0], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[1]);
+                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[0], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[1], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[3]);
                         y = newPos - 1;// - Integer.parseInt(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
                         break;
                     case 'd':
                         y += speed;
                         newPos = Integer.parseInt(doorMap.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[2])* gP.tileSize;
-                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[0], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[1]);
+                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[0], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[1], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[3]);
                         y = newPos + 1;// + Integer.parseInt(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf((y+ gP.tileSize)/gP.tileSize))[2]);
                         break;
                     case 'l':
                         x -= speed;
                         System.out.println(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize));
                         newPos = Integer.parseInt(doorMap.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2])*gP.tileSize;
-                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[0], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[1]);
+                        gP.tM.setMap(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[0], gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[1],gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[3]);
                         x = newPos - 1;// - Integer.parseInt(gP.tM.doors.get(String.valueOf(x/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
                         break;
                     case 'r':
                         x += speed;
                         newPos = Integer.parseInt(doorMap.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2])* gP.tileSize;
-                        gP.tM.setMap(gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[0], gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[1]);
+                        gP.tM.setMap(gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[0], gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[1], gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[3]);
                         x = newPos + 1;// + Integer.parseInt(gP.tM.doors.get(String.valueOf((x+ gP.tileSize)/gP.tileSize) + "," + String.valueOf(y/gP.tileSize))[2]);
                         break;
                 }

@@ -15,9 +15,8 @@ public class TileManager {
 
     public String mapFile;
     public String doorFile;
+    public String entityFile;
     public GamePanel gP;
-    public EntityManager eM;
-
     public List<List<Tile>> map;
     public Map<String, String[]> doors;
 
@@ -26,7 +25,6 @@ public class TileManager {
         this.gP = gP;
         this.mapFile = "testMap1.txt";
         this.doorFile = "testDoor1.txt";
-        this.eM = new EntityManager(gP, "testEntity1.txt");
 
         loadMap();
         loadDoors();
@@ -37,11 +35,6 @@ public class TileManager {
         this.mapFile = mapFile;
         this.doorFile = doorFile;
 
-        loadMap();
-    }
-
-    public void changeMap(String newMap){
-        mapFile = newMap;
         loadMap();
     }
 
@@ -83,11 +76,13 @@ public class TileManager {
         printMap();
     }
 
-    public void setMap(String mapName, String doorName){
+    public void setMap(String mapName, String doorName, String entityName){
         mapFile = mapName;
         doorFile = doorName;
+        entityFile = entityName;
         loadMap();
         gP.p.setDoorMap(doors);
+        gP.eM.setEntityFile(entityName);
     }
 
     public void loadDoors(){
