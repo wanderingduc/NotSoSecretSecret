@@ -1,5 +1,6 @@
 package org.example.Tiles;
 
+import org.example.Entities.EntityManager;
 import org.example.GamePanel;
 
 import java.awt.*;
@@ -15,14 +16,17 @@ public class TileManager {
     public String mapFile;
     public String doorFile;
     public GamePanel gP;
+    public EntityManager eM;
 
     public List<List<Tile>> map;
     public Map<String, String[]> doors;
+
 
     public TileManager(GamePanel gP) {
         this.gP = gP;
         this.mapFile = "testMap1.txt";
         this.doorFile = "testDoor1.txt";
+        this.eM = new EntityManager(gP, "testEntity1.txt");
 
         loadMap();
         loadDoors();

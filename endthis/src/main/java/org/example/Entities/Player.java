@@ -9,10 +9,8 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.Map;
 
-public class Player {
+public class Player extends Entity{
 
-    public int x;
-    public int y;
     GamePanel gP;
     public InputHandler iH;
     public char dir;
