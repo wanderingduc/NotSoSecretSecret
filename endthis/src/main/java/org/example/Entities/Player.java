@@ -59,7 +59,7 @@ public class Player {
     public void update(){
         if(movLock){
             lockFrame++;
-            if(lockFrame>=40){
+            if(lockFrame>=30){
                 lockFrame=0;
                 movLock = false;
             }
