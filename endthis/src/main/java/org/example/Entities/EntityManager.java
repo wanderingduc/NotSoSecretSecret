@@ -9,14 +9,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EntityManager {
 
     public List<Entity> entities;
-    public List<Entity> activeEntities;
+    public Map<String, Integer> entityMap;
     public String entityFile;
-    public String activeFile;
     public GamePanel gP;
 
     public EntityManager(GamePanel gP){
@@ -33,12 +34,12 @@ public class EntityManager {
 
     public void loadEntities(){
         entities = new ArrayList<>();
-        activeEntities = new ArrayList<>();
+        entityMap = new HashMap<>();
         try{
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             InputStream iS = classLoader.getResourceAsStream(entityFile);
             BufferedReader bR = new BufferedReader(new InputStreamReader(iS));
-            String activePath = bR.readLine();
+            int i = 0;
 
             while(true){
                 String line = bR.readLine();
@@ -63,19 +64,20 @@ public class EntityManager {
                     default:
                         break;
                 }
+                entityMap.put(String.valueOf(x)+String.valueOf(y), i);
             }
             bR.close();
 
-            classLoader = Thread.currentThread().getContextClassLoader();
-            iS = classLoader.getResourceAsStream(activePath);
-             bR = new BufferedReader(new InputStreamReader(iS));
-
-            while(true){
-                String line = bR.readLine();
-                String data[] = line.split(";");
-                String x[] = data[0].split(",");
-                String y[] = data[1].split(",");
-            }
+//            classLoader = Thread.currentThread().getContextClassLoader();
+//            iS = classLoader.getResourceAsStream(activePath);
+//            bR = new BufferedReader(new InputStreamReader(iS));
+//
+//            while(true){
+//                String line = bR.readLine();
+//                String data[] = line.split(";");
+//                String x[] = data[0].split(",");
+//                String y[] = data[1].split(",");
+//            }
         }catch (IOException e){
             e.printStackTrace();
         }

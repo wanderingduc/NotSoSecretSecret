@@ -1,1 +1,1 @@
-4,4;npc;Hello World~Hello Universe
+10,0;npc;Hello World~Hello Universe
