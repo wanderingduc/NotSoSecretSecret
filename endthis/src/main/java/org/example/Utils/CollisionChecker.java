@@ -44,7 +44,7 @@ public class CollisionChecker {
             nextTileRowE = (playerY + p.speed + gP.tileSize)/gP.tileSize;
             nextTileCol = playerX/gP.tileSize;
             nextTileColE = (playerX + gP.tileSize)/gP.tileSize;
-            if(nextTileRow >= tM.map.size() || tM.map.get(nextTileRow).get(nextTileCol).collisionStatus ||
+            if(playerY+p.speed > tM.map.size()*gP.tileSize || tM.map.get(nextTileRow).get(nextTileCol).collisionStatus ||
                     tM.map.get(nextTileRowE).get(nextTileColE).collisionStatus ||
                     tM.map.get(nextTileRow).get(nextTileColE).collisionStatus ||
                     tM.map.get(nextTileRowE).get(nextTileCol).collisionStatus){
