@@ -5,8 +5,11 @@ import org.example.Utils.CollisionChecker;
 import org.example.Utils.InputHandler;
 import org.w3c.dom.ls.LSOutput;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Map;
 
 public class Player {
@@ -24,12 +27,25 @@ public class Player {
     public boolean spriteStatus;
     public Map<String, String[]> doorMap;
 
+    //Sprites
+    public BufferedImage happy1, happy2;
+
     public Player(GamePanel gP, InputHandler iH){
         this.gP = gP;
         this.iH = iH;
         this.cC = new CollisionChecker(gP, this, gP.tM);
         setDefault();
         setDoorMap(gP.tM.doors);
+        getPlayerSprite();
+    }
+
+    public void getPlayerSprite(){
+        try {
+            this.happy1 = ImageIO.read(getClass().getResourceAsStream("/sprite/happy1.png"));
+            this.happy2 = ImageIO.read(getClass().getResourceAsStream("/sprite/happy2.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setDefault(){
@@ -44,16 +60,17 @@ public class Player {
     }
 
     public void drawPlayer(Graphics2D g){
-        Color pColor;
+        BufferedImage sprite;
         if(spriteStatus){
-            pColor = Color.MAGENTA;
+            sprite = happy1;
         }else{
-            pColor = Color.PINK;
+            sprite=happy2;
         }
-        Rectangle2D player = new Rectangle(x, y, gP.tileSize, gP.tileSize);
-        g.draw(player);
-        g.setColor(pColor);
-        g.fill(player);
+        g.drawImage(sprite, x, y, gP.tileSize, gP.tileSize, null);
+//        Rectangle2D player = new Rectangle(x, y, gP.tileSize, gP.tileSize);
+//        g.draw(player);
+//        g.setColor(pColor);
+//        g.fill(player);
     }
 
     public void update(){
