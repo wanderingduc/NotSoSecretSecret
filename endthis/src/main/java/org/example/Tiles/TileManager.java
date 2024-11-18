@@ -2,8 +2,10 @@ package org.example.Tiles;
 
 import org.example.GamePanel;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +20,7 @@ public class TileManager {
 
     public List<List<Tile>> map;
     public Map<String, String[]> doors;
+    public BufferedImage grass, rock, water;
 
     public TileManager(GamePanel gP) {
         this.gP = gP;
@@ -26,6 +29,7 @@ public class TileManager {
 
         loadMap();
         loadDoors();
+        loadResc();
     }
 
     public TileManager(GamePanel gP, String mapFile, String doorFile) {
@@ -34,11 +38,23 @@ public class TileManager {
         this.doorFile = doorFile;
 
         loadMap();
+        loadResc();
     }
 
     public void changeMap(String newMap){
         mapFile = newMap;
         loadMap();
+    }
+
+    public void loadResc() {
+        try {
+            water = ImageIO.read(getClass().getResourceAsStream("/sprite/water.png"));
+            rock = ImageIO.read(getClass().getResourceAsStream("/sprite/rock.png"));
+            grass = ImageIO.read(getClass().getResourceAsStream("/sprite/grass.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void loadMap() {
@@ -129,6 +145,8 @@ public class TileManager {
     public void drawMap(Graphics2D g) {
         Rectangle2D drawTile;
         Color color;
+        BufferedImage tileType = null;
+
 
         int col = 0;
         int row = 0;
@@ -143,12 +161,15 @@ public class TileManager {
             switch (tile) {
                 case 1:
                     color = Color.GREEN;
+                    tileType = grass;
                     break;
                 case 2:
                     color = Color.GRAY;
+                    tileType = rock;
                     break;
                 case 3:
                     color = Color.BLUE;
+                    tileType = water;
                     break;
                 case 4:
                     color = Color.DARK_GRAY;
@@ -156,11 +177,15 @@ public class TileManager {
                 default:
                     color = Color.RED;
             }
-
-            drawTile = new Rectangle(x, y, gP.tileSize, gP.tileSize);
-            g.draw(drawTile);
-            g.setColor(color);
-            g.fill(drawTile);
+            if(tileType == null) {
+                drawTile = new Rectangle(x, y, gP.tileSize, gP.tileSize);
+                g.draw(drawTile);
+                g.setColor(color);
+                g.fill(drawTile);
+            }else{
+                g.drawImage(tileType, x, y, gP.tileSize, gP.tileSize, null);
+                tileType = null;
+            }
 
             col++;
             if(col== gP.maxCol){
